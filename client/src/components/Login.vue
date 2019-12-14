@@ -4,8 +4,10 @@
             <img id="logo" src="../assets/Centrum-Logo-WHITE.png" alt="Centrum">
             <div id="box-container">
                 <h3 style="margin: 0;">Welcome</h3>
-                <input class="login-field" type="email" placeholder="email" v-model="email">
-                <input class="login-field" v-bind:type="passwordFieldType" placeholder="password" v-model="password">
+
+                <input class="login-field" type="text" placeholder="username" v-model="username" spellcheck="false">
+                <input class="login-field" v-bind:type="passwordFieldType" placeholder="password" v-model="password" spellcheck="false">
+                
                 <div class="radio-section">
                     <p>Show password</p> 
                     <label class="switch radio">
@@ -13,7 +15,11 @@
                         <span class="slider round"></span>
                     </label>
                 </div>
-                <button class="big-button">Log In</button>
+
+                <button class="button big-button">Log In</button>
+
+                <p class="text-link">Forgot password</p>
+                <p class="text-link">Forgot username</p>
             </div>
         </div>
     </div>
@@ -24,7 +30,7 @@ export default {
     name: 'Login',
     data: function() {
         return {
-            email: "",
+            username: "",
             password: "",
             showPassword: false
         }
@@ -82,9 +88,7 @@ export default {
         float: right;
     }
 
-.big-button {
-    width: 13rem;
-    padding: .5rem;
+.button {
     border-radius: .4rem;
     background-color: #015eea;
     color: white;
@@ -92,11 +96,30 @@ export default {
     outline: none;
     transition: background-color ease-in .3s;
 }
-    .big-button:hover {
+    .button:hover {
         background-color: #1680c7;
         cursor: pointer;
     }
 
+    .big-button {
+        width: 13rem;
+        padding: .5rem;
+    }
+
+    .small-button {
+        width: auto;
+        padding: .2rem;
+        font-size: 12px;
+    }
+
+.text-link {
+    color: #015eea;
+    font-size: 10px;
+}
+    .text-link:hover {
+        color: #1680c7;
+        cursor: pointer;
+    }
 /*******************SLIDER*********************/
 .switch {
   position: relative;
