@@ -36,9 +36,10 @@
             v-for="item in items"
             :key="item.name"
             link
+            v-on:click="signout"
           >
             <v-list-item-icon>
-              <v-icon color="primary" class="circle-icon" size="15">{{ item.icon }}</v-icon>
+              <v-icon color="primary" class="circle-icon" size="15">{{ item.meta.icon }}</v-icon>
             </v-list-item-icon>
   
             <v-list-item-content>
@@ -51,6 +52,7 @@
 
 <script>
 import routes from '../routes'
+import auth from '../firebase.auth.config'
 
 export default {
     data: function() {
@@ -63,9 +65,16 @@ export default {
     computed: {
         items: function() {
             return this.routes.filter( route => {
-                return route.nav
+              if(route.meta) return route.meta.nav
+              else return false
             })
         }
+    },
+
+    methods: {
+      signout: function() {
+        auth.signOut()
+      }
     }
 }
 </script>

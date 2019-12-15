@@ -5,8 +5,23 @@
             <div id="box-container">
                 <h3 style="margin: 0;">Welcome</h3>
 
-                <input class="login-field" type="text" placeholder="username" v-model="username" spellcheck="false">
-                <input class="login-field" v-bind:type="passwordFieldType" placeholder="password" v-model="password" spellcheck="false">
+                <input 
+                    v-on:keyup.enter="signin"
+                    autofocus 
+                    class="login-field" 
+                    type="email" 
+                    placeholder="email"
+                    v-model="email" 
+                    spellcheck="false"
+                 >
+                <input 
+                    v-on:keyup.enter="signin" 
+                    class="login-field" 
+                    v-bind:type="passwordFieldType" 
+                    placeholder="password" 
+                    v-model="password" 
+                    spellcheck="false"
+                >
                 
                 <div class="radio-section">
                     <p>Show password</p> 
@@ -16,7 +31,7 @@
                     </label>
                 </div>
 
-                <button class="button big-button">Log In</button>
+                <button v-on:click="signin" class="button big-button">Log In</button>
 
                 <p class="text-link">Forgot password</p>
                 <p class="text-link">Forgot username</p>
@@ -26,11 +41,13 @@
 </template>
 
 <script>
+import auth from '../firebase.auth.config'
+
 export default {
     name: 'Login',
     data: function() {
         return {
-            username: "",
+            email: "",
             password: "",
             showPassword: false
         }
@@ -42,6 +59,16 @@ export default {
             } else {
                 return "password"
             }
+        }
+    },
+    methods: {
+        signin: function() {
+            auth.signInWithEmailAndPassword(this.email, this.password).then((cred) => {
+                cred
+                this.$router.push('/home')
+            }).catch(err => {
+                console.log(err)
+            })
         }
     }
 }
