@@ -1,7 +1,8 @@
 <template>
-  <v-app>
+  <v-app class="secondary">
     <router-view name="nav"></router-view>
-    <v-content>
+    <v-content class="secondary">
+      <Toolbar/>
       <router-view></router-view>
     </v-content>
     <v-btn v-if="loggedin" v-on:click="signout">signout</v-btn>
@@ -10,11 +11,13 @@
 
 <script>
 import auth from './firebase.auth.config'
+import Toolbar from './components/ToolBar'
 
 export default {
   name: 'App',
 
   components: {
+    Toolbar
   },
 
   computed: {
@@ -23,10 +26,6 @@ export default {
       else return false
     }
   },
-
-  data: () => ({
-    //
-  }),
 
   methods: {
     signout: function() {

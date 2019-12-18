@@ -1,20 +1,22 @@
 <template>
+<section>
     <v-navigation-drawer
     app
     light
     color="primary"
     :mini-variant.sync="mini"
-    expand-on-hover>
-
-        <div class="d-flex align-center">
+    class="nav pr=10px"
+    floating>
+        <div class="d-flex align-center logo-container" v-on:click="goHome">
             <v-img
             v-if="mini"
             alt="Centrum Logo"
             class="shrink mr-2"
             contain
+            min-width="75"
             src="../assets/C-Logo-WHITE.png"
             transition="scale-transition"
-            width="80"
+            width="75"
             />
 
             <v-img
@@ -36,7 +38,6 @@
             v-for="item in items"
             :key="item.name"
             link
-            v-on:click="signout"
           >
             <v-list-item-icon>
               <v-icon color="primary" class="circle-icon" size="15">{{ item.meta.icon }}</v-icon>
@@ -48,17 +49,21 @@
           </v-list-item>
         </v-list>
     </v-navigation-drawer>
+</section>
 </template>
 
 <script>
 import routes from '../routes'
-import auth from '../firebase.auth.config'
 
 export default {
+    name: 'Navbar',
+    props: {
+      mini: Boolean
+    },
+    
     data: function() {
         return {
-            routes,
-            mini: true
+            routes
         }
     },
 
@@ -72,14 +77,24 @@ export default {
     },
 
     methods: {
-      signout: function() {
-        auth.signOut()
+      goHome: function() {
+        this.$router.push('/home')
       }
     }
 }
 </script>
 
 <style scoped>
+.nav {
+  -webkit-box-shadow: 9px 0px 19px -7px rgba(0,0,0,0.75);
+  -moz-box-shadow: 9px 0px 19px -7px rgba(0,0,0,0.75);
+  box-shadow: 9px 0px 19px -7px rgba(0,0,0,0.75);
+}
+
+.logo-container:hover {
+  cursor: pointer;
+}
+
 .circle-icon {
     background: #ffffff;
     border-radius: 50%;
@@ -92,5 +107,11 @@ export default {
 .nav-text {
     color: white;
     font-size: 20px;
+}
+
+.toggle-button {
+  float: right;
+  left: 30px;
+  z-index: 9999;
 }
 </style>
