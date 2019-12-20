@@ -1,10 +1,10 @@
 <template>
-    <v-toolbar flat class="secondary">
-        <v-app-bar-nav-icon color="primary"><v-icon>fa-stream</v-icon></v-app-bar-nav-icon>
+    <v-app-bar flat class="secondary" app>
+        <v-app-bar-nav-icon color="primary" v-on:click="$emit('toggleNav')"><v-icon>fa-stream</v-icon></v-app-bar-nav-icon>
         <v-spacer></v-spacer>
         <v-btn text color="primary">ABOUT</v-btn>
         <v-btn text color="primary">CONTACT</v-btn>
-    </v-toolbar>
+    </v-app-bar>
 </template>
 
 <script>

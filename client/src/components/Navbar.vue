@@ -1,12 +1,11 @@
 <template>
-<section>
+<v-container fluid class="pa-0">
     <v-navigation-drawer
     app
     light
     color="primary"
     :mini-variant.sync="mini"
-    class="nav pr=10px"
-    floating>
+    class="nav">
         <div class="d-flex align-center logo-container" v-on:click="goHome">
             <v-img
             v-if="mini"
@@ -37,7 +36,7 @@
           <v-list-item
             v-for="item in items"
             :key="item.name"
-            link
+            :to="item.path"
           >
             <v-list-item-icon>
               <v-icon color="primary" class="circle-icon" size="15">{{ item.meta.icon }}</v-icon>
@@ -49,21 +48,27 @@
           </v-list-item>
         </v-list>
     </v-navigation-drawer>
-</section>
+    <v-content>
+      <Toolbar v-on:toggleNav="mini = !mini"/>
+    </v-content>
+</v-container>
 </template>
 
 <script>
+import Toolbar from './ToolBar'
 import routes from '../routes'
 
 export default {
     name: 'Navbar',
-    props: {
-      mini: Boolean
+
+    components: {
+      Toolbar
     },
     
     data: function() {
         return {
-            routes
+            routes,
+            mini: false
         }
     },
 
